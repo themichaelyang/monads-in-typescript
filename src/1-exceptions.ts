@@ -56,8 +56,8 @@ function evaluate(term: Term): M<number> {
   }
 }
 
-let answer = evaluate([[1972, 2], 23])
-console.log(answer)
+let answer: Term = [[1972, 2], 23]
+console.log(evaluate(answer))
 
-let error = evaluate([1, 0])
-console.log(error)
+let error: Term = [1, 0]
+console.log(evaluate(error))
