@@ -17,8 +17,8 @@ function evaluate(term: Term): number {
 // answer, error :: Term
 // answer = (Div (Div (Con 1972 ) (Con 2 )) (Con 23 ))
 let answer = evaluate([[1972, 2], 23])
-console.log(evaluate(answer))
+console.log(answer)
 
 // error = (Div (Con 1)(Con 0))
 let error = evaluate([1, 0])
-console.log(evaluate(error))
+console.log(error)
