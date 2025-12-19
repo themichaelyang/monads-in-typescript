@@ -32,11 +32,15 @@ class M implements Monadic<number, Ma> {
     return new M(err)
   }
 
-  star(fn: (a: number) => Monadic<any, Ma>) {
+  // (⋆)   :: M a → (a → M b) → M b
+  // m ⋆ k = case m of
+  //           Raise e  → Raise e
+  //           Return a → k a
+  star(k: (a: number) => Monadic<any, Ma>) {
     if (this.value instanceof Error) {
       return M.raise(this.value)
     } else {
-      return fn(this.value)
+      return k(this.value)
     }
   }
 }
