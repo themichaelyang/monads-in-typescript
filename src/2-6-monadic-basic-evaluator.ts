@@ -1,20 +1,20 @@
 type Monad<A> = {
   star: <B>(this: Monad<A>, fn: (value: A) => Monad<B>) => Monad<B>
-  value: A
+  value: any
 }
 type Unit<A> = (a: A) => Monad<A>
 
 // type M a = a
 type M<A> = A
 
-// This is a bit different than the paper; we need a wrapper object to store the value.
-// We could store it in the closure of "star" only, but then we can't easily unwrap the value.
-// without producing another monad.
+// This is a bit different than the paper; we use a wrapper object to store the value.
+// We could store it in the closure of "star" only, like Promises, but then we can't
+// easily unwrap the value without producing another monad.
 //
 // Again, see: https://blog.salrahman.com/posts/2024/11/monads-in-javascript
 // unit       :: a → I a
 // unit a     = a
-const unit: Unit<number> = (a: number): Monad<M<number>> => ({
+const unit: Unit<M<number>> = (a: M<number>): Monad<M<number>> => ({
   // (⋆)      :: M a → (a → M b) → M b
   // a ⋆ k    = k a
 	star: (f) => f(a),
