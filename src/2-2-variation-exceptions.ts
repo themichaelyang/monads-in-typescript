@@ -3,7 +3,7 @@
 //
 // For example, I prefer structural typing and use of existing types
 // over nominal typing if possible, to closer match how actual Typescript
-// might be written.
+// might be written. We also won't curry everything.
 //
 // Typescript is also more restrictive of self-referential types.
 //

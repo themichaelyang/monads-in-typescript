@@ -34,3 +34,21 @@ function line(term: Term, a: number): Output {
 
 let answer: Term = [[1972, 2], 23]
 console.log(evaluate(answer)[0])
+
+// Say that it was desired to modify the previous program to display
+// the execution trace in the reverse order:
+function evaluate_rev(term: Term): M<number> {
+  if (typeof term == 'number') {
+    return [line(term, term), term]
+  } else {
+    let [t, u] = term
+
+    let [x, a] = evaluate_rev(t)
+    let [y, b] = evaluate_rev(u)
+
+    // line (Div t u) (a ÷ b) ++ y ++ x
+    return [`${line(term, Math.floor(a / b))}${y}${x}`, Math.floor(a / b)]
+  }
+}
+
+console.log(evaluate_rev(answer)[0])
